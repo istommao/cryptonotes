@@ -22,3 +22,46 @@
 - 小强获得了小明的公钥，使用它加密信息
 - 小明获得加密信息后，用私钥解密
 
+## 使用cryptography进行简单的RSA实践
+
+`https://github.com/pyca/cryptography`
+
+```python
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.backends import default_backend
+
+# 生成私钥
+key_size = 2048
+private_key = rsa.generate_private_key(
+    public_exponent=65537,
+    key_size=key_size,
+    backend=default_backend()
+)
+# 根据私钥获取公钥
+public_key = private_key.public_key()
+
+# 公钥加密
+algorithm = hashes.SHA256()
+oaep_padding = padding.OAEP(
+     mgf=padding.MGF1(algorithm=algorithm),
+     algorithm=algorithm,
+     label=None
+ )
+
+message = 'Hello RSA'
+ciphertext = public_key.encrypt(message.encode(), oaep_padding)
+
+# 私钥解密
+data = private_key.decrypt(ciphertext, padding_data)
+
+# 私钥签名
+pss_padding = padding.PSS(
+    mgf=padding.MGF1(algorithm),
+    salt_length=padding.PSS.MAX_LENGTH
+)
+sign_data = private_key.sign(message.encode(), pss_padding, hashes.SHA256())
+
+# 公钥验签
+public_key.verify(sign_data, message.encode(), pss_padding, hashes.SHA256())
+```
