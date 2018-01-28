@@ -9,5 +9,13 @@
 
 ![](./_image/CaesarCipherEncrypt.png)
 
-## Enigma (二战德国使用)
+`简单示例`
+```python
+def caesar_cipher(sentence, step=3):
+    return ''.join([chr(ord(c) + (step)) if c != ' ' else ' ' for c in sentence])
 
+ciphertext = caesar_cipher('Hello Caesar cipher')
+print(ciphertext)
+```
+
+## Enigma (二战德国使用)

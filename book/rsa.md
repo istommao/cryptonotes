@@ -44,10 +44,10 @@ public_key = private_key.public_key()
 # 公钥加密
 algorithm = hashes.SHA256()
 oaep_padding = padding.OAEP(
-     mgf=padding.MGF1(algorithm=algorithm),
-     algorithm=algorithm,
-     label=None
- )
+    mgf=padding.MGF1(algorithm=algorithm),
+    algorithm=algorithm,
+    label=None
+)
 
 message = 'Hello RSA'
 ciphertext = public_key.encrypt(message.encode(), oaep_padding)
