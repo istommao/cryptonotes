@@ -12,6 +12,10 @@
 * [哈希函数/散列函数](hash.md)
     * [MD5](md5.md)
     * [SHA](sha.md)
+* [数字签名](ds.md)
+
 
 ---
+* [在线加密解密工具](http://tools.guardui.net/encrypt/)
 * [使用cryptokit实践](cryptokit.md)
+* [其他文章](other.md)
